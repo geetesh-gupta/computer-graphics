@@ -38,6 +38,8 @@ MODEL_DETAILS = {
 # Now, use any of the triangle rsterization algorithm to render the object.
 # Determine the window and viewport sizes accordingly.
 # Compare your results with the results obtained by using inbuilt functions to perform these steps.
+
+
 def read_file(file):
     """
     returns 
@@ -61,14 +63,13 @@ def read_file(file):
         vertices = []
         for _ in range(num_vertices):
             vertices.append(list(
-            map(float, f.readline().split())))
+                map(float, f.readline().split())))
 
         # List of faces: number of vertices, followed by the indexes of the composing vertices, in order (indexed from zero).
         faces = []
         for _ in range(num_faces):
             faces.append(list(
-            map(int, f.readline().split()))[1:])
-
+                map(int, f.readline().split()))[1:])
 
         return {
             'num_vertices': num_vertices,
@@ -112,7 +113,6 @@ if __name__ == '__main__':
     print(obj.vertices['world_coords'][:3])
     for vertex_index in obj.faces[0]:
         print(obj.vertices['world_coords'][vertex_index])
-
 
     # Get camera coordinates
     obj.get_camera_coords(model_details['camera'])
