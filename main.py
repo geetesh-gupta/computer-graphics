@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     # Create model object
     obj = Object(*read_off_file(file_path).values())
-    scene = Scene(camera_pos, camera_direction, light_source_pos)
+    scene = Scene(camera_pos, camera_direction, light_source_pos, (600, 800))
     scene.add_object(obj)
     scene.simulate_model()
 
@@ -51,3 +51,7 @@ if __name__ == '__main__':
     print(f"View Frustum: {obj.view_frustum}")
     print(f"Faces Visible: {obj.faces[Face.VISIBLE][:10]}")
     print(f"Intensity via Phong Shading: {obj.faces[Face.LIGHT_INTENSITY][:10]}")
+    print("------------")
+    print(f"Viewport Coords: {obj.vertices[Coords.VIEWPORT][:3]}")
+    print("------------")
+

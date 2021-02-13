@@ -1,5 +1,6 @@
 from common import Coords, Face
 import numpy as np
+from triangle import getTriangleMatrixFromAlgo
 
 
 class Object:
@@ -10,7 +11,8 @@ class Object:
         self.vertices = {
             Coords.WORLD: np.array(vertices),
             Coords.CAMERA: [],
-            Coords.NORMALIZED: []
+            Coords.NORMALIZED: [],
+            Coords.VIEWPORT: []
         }
         self.faces = {
             Face.INDICES: np.array(faces),
@@ -91,6 +93,17 @@ class Object:
             h = (e+l)/np.linalg.norm(e+l)
             c = max(0, np.dot(n, l)) + np.dot(h, n)
             self.faces[Face.LIGHT_INTENSITY].append(c)
+
+    def window_viewport_transformation(self, viewport):
+        for i, face in enumerate(self.faces[Face.INDICES]):
+            if self.faces[Face.VISIBLE][i]:
+                vertices = [self.vertices[Coords.NORMALIZED][vertex_index]
+                            for vertex_index in face]
+                viewport_coords = [[viewport[0]*(v[0]+1)/2, viewport[1]*(v[1]+1)/2]
+                                   for v in vertices]
+                self.vertices[Coords.VIEWPORT].append(viewport_coords)
+            else:
+                None
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'

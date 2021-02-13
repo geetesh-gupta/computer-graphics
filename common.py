@@ -1,10 +1,12 @@
 from enum import Enum
 import numpy as np
 
+
 class Coords(Enum):
     WORLD = 1
     CAMERA = 2
     NORMALIZED = 3
+    VIEWPORT = 4
 
 
 class Models(Enum):
@@ -14,11 +16,13 @@ class Models(Enum):
     wolf02 = 4
     triangle = 5
 
+
 class Face(Enum):
     INDICES = 1
     NORMAL = 2
     VISIBLE = 3
     LIGHT_INTENSITY = 4
+
 
 class FileDetails(Enum):
     FILE_PATH = 1
