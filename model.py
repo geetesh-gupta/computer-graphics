@@ -33,7 +33,6 @@ class Object:
             self.faces[Face.NORMAL].append(normal)
 
     def get_view_frustum(self, camera_pos):
-        print(camera_pos)
         l = float('inf')
         r = float('-inf')
         b = float('inf')
@@ -77,3 +76,51 @@ class Object:
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'
+
+
+if __name__ == '__main__':
+    from utils.read_write import read_off_file
+    from common import MODEL_DETAILS, Models, Coords, FileDetails, Face
+    from model import Object
+
+    # Select model to use
+    model = Models.triangle
+    model_details = MODEL_DETAILS[model]
+    file_path = model_details[FileDetails.FILE_PATH]
+    camera_pos = model_details[FileDetails.CAMERA_POS]
+    light_source_pos = model_details[FileDetails.LIGHT_SOURCE_POS]
+    camera_direction = [0, 0, -1]
+
+    # Create model object
+    obj = Object(*read_off_file(file_path).values())
+
+    # Get camera coordinates
+    obj.get_camera_coords(camera_pos)
+
+    # Get face normals
+    obj.get_face_normals()
+
+    # Get View frustum
+    obj.get_view_frustum(camera_pos)
+
+    # Get Normalized Coords
+    obj.get_normalized_coords()
+
+    # Backface Detection
+    obj.backface_detection(camera_direction)
+
+    # Display some values
+    print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
+    print(f"Camera Coords: {obj.vertices[Coords.CAMERA][:3]}")
+    print("---Face 1---")
+    for vertex_index, i in enumerate(obj.faces[Face.INDICES][0]):
+        print(
+            f"Vertex {i+1} World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
+        print(
+            f"Vertex {i+1} Camera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
+        print(
+            f"Vertex {i+1} Normalized Coords: {obj.vertices[Coords.NORMALIZED][vertex_index]}")
+    print(f"Face Normal: {obj.faces[Face.NORMAL][0]}")
+    print("------------")
+    print(f"View Frustum: {obj.view_frustum}")
+    print(f"Faces Visible: {obj.faces[Face.VISIBLE][:10]}")

@@ -5,6 +5,7 @@ from OpenGL.GL import *
 from utils.read_write import read_off_file
 from common import MODEL_DETAILS, Models, Coords, FileDetails, Face
 from model import Object
+from scene import Scene
 
 # Consider any one of the meshes and the corresponding camera location from the below table.
 # Transform the object w.r.t. the camera coordinate system.
@@ -12,7 +13,7 @@ from model import Object
 # Determine the coordinates of the view frustum such that all the triangles lie in the view frustum.
 # Perform the normalized device coordinate transformation (use inbuilt function for this purpose).
 # Now, use the back-face culling algorithm to remove the invisible triangles.
-# TODO: Place a light source at the locations specified.
+# Place a light source at the locations specified.
 # TODO: Use the Phong shading algorithm with highlights to find the intensity of at each pixel.
 # TODO: Now, use any of the triangle rsterization algorithm to render the object.
 # TODO: Determine the window and viewport sizes accordingly.
@@ -25,25 +26,14 @@ if __name__ == '__main__':
     model_details = MODEL_DETAILS[model]
     file_path = model_details[FileDetails.FILE_PATH]
     camera_pos = model_details[FileDetails.CAMERA_POS]
+    light_source_pos = model_details[FileDetails.LIGHT_SOURCE_POS]
     camera_direction = [0, 0, -1]
 
     # Create model object
     obj = Object(*read_off_file(file_path).values())
-
-    # Get camera coordinates
-    obj.get_camera_coords(camera_pos)
-
-    # Get face normals
-    obj.get_face_normals()
-
-    # Get View frustum
-    obj.get_view_frustum(camera_pos)
-
-    # Get Normalized Coords
-    obj.get_normalized_coords()
-
-    # Backface Detection
-    obj.backface_detection(camera_direction)
+    scene = Scene(camera_pos, camera_direction, light_source_pos)
+    scene.add_object(obj)
+    scene.simulate_model()
 
     # Display some values
     print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
@@ -60,4 +50,3 @@ if __name__ == '__main__':
     print("------------")
     print(f"View Frustum: {obj.view_frustum}")
     print(f"Faces Visible: {obj.faces[Face.VISIBLE][:10]}")
-
