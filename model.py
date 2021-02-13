@@ -66,8 +66,10 @@ class Object:
             [0, 0, -1, 0]
         ])
         for v in self.vertices[Coords.CAMERA]:
-            self.vertices[Coords.NORMALIZED].append(
-                np.dot(normalization_matrix, [*v, 1])[:-1])
+            print(v)
+            clip_coords = np.dot(normalization_matrix, np.array([*v, 1]).transpose())
+            normalized_coords = clip_coords/clip_coords[3]
+            self.vertices[Coords.NORMALIZED].append(normalized_coords[:-1])
 
     def backface_detection(self, camera_direction):
         for face_normal in self.faces[Face.NORMAL]:
