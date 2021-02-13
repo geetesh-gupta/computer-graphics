@@ -1,4 +1,4 @@
-from common import Coords
+from common import Coords, Face
 import numpy as np
 
 
@@ -11,11 +11,22 @@ class Object:
             Coords.WORLD: np.array(vertices),
             Coords.CAMERA: []
         }
-        self.faces = np.array(faces)
+        self.faces = {
+            Face.INDICES: np.array(faces),
+            Face.NORMAL: []
+        }
 
     def get_camera_coords(self, camera_position):
         self.vertices[Coords.CAMERA] = self.vertices[Coords.WORLD] - \
             camera_position
+
+    def get_face_normals(self):
+        for face in self.faces[Face.INDICES]:
+            vertices = [self.vertices[Coords.WORLD][vertex_index] for vertex_index in face]
+            side1 = vertices[1] - vertices[0]
+            side2 = vertices[2] - vertices[0]
+            normal = np.cross(side1, side2)
+            self.faces[Face.NORMAL].append(normal)
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'

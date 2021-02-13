@@ -3,12 +3,12 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
 from utils.read_write import read_off_file
-from common import MODEL_DETAILS, Models, Coords, FileDetails
+from common import MODEL_DETAILS, Models, Coords, FileDetails, Face
 from model import Object
 
 # Consider any one of the meshes and the corresponding camera location from the below table.
 # Transform the object w.r.t. the camera coordinate system.
-# TODO: Find oriented normal for each triangle.
+# Find oriented normal for each triangle.
 # TODO: Determinethe coordinates of the view frustum such that all the triangles lie in the view frustum.
 # TODO: Perform the normalized device coordinate transformation (use inbuilt function for this purpose).
 # TODO: Now, use the back-face culling algorithm to remove the invisible triangles.
@@ -21,7 +21,7 @@ from model import Object
 
 if __name__ == '__main__':
     # Select model to use
-    model = Models.wolf02
+    model = Models.triangle
     model_details = MODEL_DETAILS[model]
 
     # Create model object
@@ -34,6 +34,10 @@ if __name__ == '__main__':
     print(obj.vertices[Coords.WORLD][:3])
     print(obj.vertices[Coords.CAMERA][:3])
     print("Face 1")
-    for vertex_index in obj.faces[0]:
+    for vertex_index in obj.faces[Face.INDICES][0]:
         print(f"World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
         print(f"Camera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
+
+    # Get face normals
+    obj.get_face_normals()
+    print(f"{obj.faces[Face.NORMAL][0]}")
