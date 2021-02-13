@@ -1,4 +1,3 @@
-
 def read_off_file(file):
     """
     Returns 

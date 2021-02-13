@@ -1,5 +1,5 @@
 from enum import Enum
-
+import numpy as np
 
 class Coords(Enum):
     WORLD = 1
@@ -22,22 +22,22 @@ class FileDetails(Enum):
 MODEL_DETAILS = {
     Models.cat01: {
         FileDetails.FILE_PATH: 'PA2_Models/cat01.off',
-        FileDetails.CAMERA_POS: [-50, -60, 10],
-        FileDetails.LIGHT_SOURCE_POS: [-50, -60, 160]
+        FileDetails.CAMERA_POS: np.array([-50, -60, 10]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([-50, -60, 160])
     },
     Models.gorilla05: {
         FileDetails.FILE_PATH: 'PA2_Models/gorilla05.off',
-        FileDetails.CAMERA_POS: [-70, 30, 60],
-        FileDetails.LIGHT_SOURCE_POS: [-70, 30, 60]
+        FileDetails.CAMERA_POS: np.array([-70, 30, 60]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([-70, 30, 60])
     },
     Models.michael18: {
         FileDetails.FILE_PATH: 'PA2_Models/michael18.off',
-        FileDetails.CAMERA_POS: [-60, -120, 10],
-        FileDetails.LIGHT_SOURCE_POS: [-60, -120, 80]
+        FileDetails.CAMERA_POS: np.array([-60, -120, 10]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([-60, -120, 80])
     },
     Models.wolf02: {
         FileDetails.FILE_PATH: 'PA2_Models/wolf02.off',
-        FileDetails.CAMERA_POS: [-60, -120, 10],
-        FileDetails.LIGHT_SOURCE_POS: [-60, -120, 100]
+        FileDetails.CAMERA_POS: np.array([-60, -120, 10]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([-60, -120, 100])
     },
 }

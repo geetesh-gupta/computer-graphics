@@ -1,5 +1,5 @@
-from utils.tranformations import transform_to_camera_coords
 from common import Coords
+import numpy as np
 
 
 class Object:
@@ -8,14 +8,14 @@ class Object:
         self.num_faces = num_faces
         self.num_edges = num_edges
         self.vertices = {
-            Coords.WORLD: vertices,
+            Coords.WORLD: np.array(vertices),
             Coords.CAMERA: []
         }
-        self.faces = faces
+        self.faces = np.array(faces)
 
     def get_camera_coords(self, camera_position):
-        self.vertices[Coords.CAMERA] = [
-            transform_to_camera_coords(v, camera_position) for v in self.vertices[Coords.WORLD]]
+        self.vertices[Coords.CAMERA] = self.vertices[Coords.WORLD] - \
+            camera_position
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'
