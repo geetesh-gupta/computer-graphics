@@ -10,7 +10,7 @@ from model import Object
 # Transform the object w.r.t. the camera coordinate system.
 # Find oriented normal for each triangle.
 # Determine the coordinates of the view frustum such that all the triangles lie in the view frustum.
-# TODO: Perform the normalized device coordinate transformation (use inbuilt function for this purpose).
+# Perform the normalized device coordinate transformation (use inbuilt function for this purpose).
 # TODO: Now, use the back-face culling algorithm to remove the invisible triangles.
 # TODO: Place a light source at the locations specified.
 # TODO: Use the Phong shading algorithm with highlights to find the intensity of at each pixel.
@@ -38,6 +38,9 @@ if __name__ == '__main__':
     # Get View frustum
     obj.get_view_frustum(camera_pos)
 
+    # Get Normalized Coords
+    obj.get_normalized_coords()
+
     # Display some values
     print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
     print(f"Camera Coords: {obj.vertices[Coords.CAMERA][:3]}")
@@ -45,6 +48,7 @@ if __name__ == '__main__':
     for vertex_index, i in enumerate(obj.faces[Face.INDICES][0]):
         print(f"Vertex {i+1} World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
         print(f"Vertex {i+1} Camera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
+        print(f"Vertex {i+1} Normalized Coords: {obj.vertices[Coords.NORMALIZED][vertex_index]}")
     print(f"Face Normal: {obj.faces[Face.NORMAL][0]}")
     print("------------")
     print(f"View Frustum: {obj.view_frustum}")

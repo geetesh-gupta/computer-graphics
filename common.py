@@ -4,6 +4,7 @@ import numpy as np
 class Coords(Enum):
     WORLD = 1
     CAMERA = 2
+    NORMALIZED = 3
 
 
 class Models(Enum):
