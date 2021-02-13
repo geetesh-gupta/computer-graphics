@@ -15,8 +15,8 @@ from scene import Scene
 # Now, use the back-face culling algorithm to remove the invisible triangles.
 # Place a light source at the locations specified.
 # Use the Phong shading algorithm with highlights to find the intensity of at each pixel.
-# TODO: Now, use any of the triangle rsterization algorithm to render the object.
-# TODO: Determine the window and viewport sizes accordingly.
+# Now, use any of the triangle rsterization algorithm to render the object.
+# Determine the window and viewport sizes accordingly.
 # TODO: Compare your results with the results obtained by using inbuilt functions to perform these steps.
 
 
