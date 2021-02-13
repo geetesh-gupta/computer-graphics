@@ -17,6 +17,7 @@ class Models(Enum):
 class Face(Enum):
     INDICES = 1
     NORMAL = 2
+    VISIBLE = 3
 
 class FileDetails(Enum):
     FILE_PATH = 1

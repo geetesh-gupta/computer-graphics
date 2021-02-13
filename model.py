@@ -14,7 +14,8 @@ class Object:
         }
         self.faces = {
             Face.INDICES: np.array(faces),
-            Face.NORMAL: []
+            Face.NORMAL: [],
+            Face.VISIBLE: []
         }
         self.view_frustum = None
 
@@ -68,6 +69,11 @@ class Object:
         for v in self.vertices[Coords.CAMERA]:
             self.vertices[Coords.NORMALIZED].append(
                 np.dot(normalization_matrix, [*v, 1])[:-1])
+
+    def backface_detection(self, camera_direction):
+        for face_normal in self.faces[Face.NORMAL]:
+            self.faces[Face.VISIBLE].append(np.dot(
+                camera_direction, face_normal) > 0)
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'

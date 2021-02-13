@@ -11,7 +11,7 @@ from model import Object
 # Find oriented normal for each triangle.
 # Determine the coordinates of the view frustum such that all the triangles lie in the view frustum.
 # Perform the normalized device coordinate transformation (use inbuilt function for this purpose).
-# TODO: Now, use the back-face culling algorithm to remove the invisible triangles.
+# Now, use the back-face culling algorithm to remove the invisible triangles.
 # TODO: Place a light source at the locations specified.
 # TODO: Use the Phong shading algorithm with highlights to find the intensity of at each pixel.
 # TODO: Now, use any of the triangle rsterization algorithm to render the object.
@@ -25,6 +25,7 @@ if __name__ == '__main__':
     model_details = MODEL_DETAILS[model]
     file_path = model_details[FileDetails.FILE_PATH]
     camera_pos = model_details[FileDetails.CAMERA_POS]
+    camera_direction = [0, 0, -1]
 
     # Create model object
     obj = Object(*read_off_file(file_path).values())
@@ -41,14 +42,22 @@ if __name__ == '__main__':
     # Get Normalized Coords
     obj.get_normalized_coords()
 
+    # Backface Detection
+    obj.backface_detection(camera_direction)
+
     # Display some values
     print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
     print(f"Camera Coords: {obj.vertices[Coords.CAMERA][:3]}")
     print("---Face 1---")
     for vertex_index, i in enumerate(obj.faces[Face.INDICES][0]):
-        print(f"Vertex {i+1} World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
-        print(f"Vertex {i+1} Camera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
-        print(f"Vertex {i+1} Normalized Coords: {obj.vertices[Coords.NORMALIZED][vertex_index]}")
+        print(
+            f"Vertex {i+1} World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
+        print(
+            f"Vertex {i+1} Camera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
+        print(
+            f"Vertex {i+1} Normalized Coords: {obj.vertices[Coords.NORMALIZED][vertex_index]}")
     print(f"Face Normal: {obj.faces[Face.NORMAL][0]}")
     print("------------")
     print(f"View Frustum: {obj.view_frustum}")
+    print(f"Faces Visible: {obj.faces[Face.VISIBLE][:10]}")
+
