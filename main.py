@@ -1,3 +1,8 @@
+
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+from OpenGL.GL import *
+
 MODELS = ['cat01', 'gorilla05', 'michael18', 'wolf02']
 MODEL_DETAILS = {
     'cat01': {
@@ -33,12 +38,6 @@ MODEL_DETAILS = {
 # Now, use any of the triangle rsterization algorithm to render the object.
 # Determine the window and viewport sizes accordingly.
 # Compare your results with the results obtained by using inbuilt functions to perform these steps.
-
-
-def readline(f):
-    return list(map(float, f.readline().split()))
-
-
 def read_file(file):
     """
     returns 
@@ -61,12 +60,15 @@ def read_file(file):
         # List of vertices: X, Y and Z coordinates
         vertices = []
         for _ in range(num_vertices):
-            vertices.append(readline(f))
+            vertices.append(list(
+            map(float, f.readline().split())))
 
         # List of faces: number of vertices, followed by the indexes of the composing vertices, in order (indexed from zero).
         faces = []
         for _ in range(num_faces):
-            faces.append(readline(f)[1:])
+            faces.append(list(
+            map(int, f.readline().split()))[1:])
+
 
         return {
             'num_vertices': num_vertices,
@@ -90,16 +92,11 @@ class Object:
             'world_coords': vertices,
             'camera_coords': []
         }
-        self.faces = {
-            'world_coords': faces,
-            'camera_coords': [],
-        }
+        self.faces = faces
 
     def get_camera_coords(self, camera_position):
         self.vertices['camera_coords'] = [
             convert_to_camera_coords(v, camera_position) for v in self.vertices['world_coords']]
-        self.faces['camera_coords'] = [
-            convert_to_camera_coords(v, camera_position) for v in self.faces['world_coords']]
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'
@@ -109,11 +106,16 @@ if __name__ == '__main__':
     # Select model to use
     model = MODELS[3]
     model_details = MODEL_DETAILS[model]
-    
+
     # Create model object
     obj = Object(*read_file(model_details['file']).values())
-    print(obj.faces['world_coords'][:10])
+    print(obj.vertices['world_coords'][:3])
+    for vertex_index in obj.faces[0]:
+        print(obj.vertices['world_coords'][vertex_index])
+
 
     # Get camera coordinates
     obj.get_camera_coords(model_details['camera'])
-    print(obj.faces['camera_coords'][:10])
+    print(obj.vertices['camera_coords'][:3])
+    for vertex_index in obj.faces[0]:
+        print(obj.vertices['camera_coords'][vertex_index])
