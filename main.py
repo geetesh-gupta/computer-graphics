@@ -1,5 +1,5 @@
-models = ['cat01', 'gorilla05', 'michael18', 'wolf02']
-model_details = {
+MODELS = ['cat01', 'gorilla05', 'michael18', 'wolf02']
+MODEL_DETAILS = {
     'cat01': {
         'file': 'PA2_Models/cat01.off',
         'camera': [-50, -60, 10],
@@ -40,12 +40,23 @@ def readline(f):
 
 
 def read_file(file):
+    """
+    returns 
+    {
+        num_vertices,
+        num_faces,
+        num_edges,
+        vertices,
+        faces,
+    }
+    """
     with open(file) as f:
         # First line: the letters OFF to mark the file type.
         filetype = f.readline()
 
         # Second line: the number of vertices, number of faces, and number of edges, in order
-        num_vertices, num_faces, num_edges = list(map(int, f.readline().split()))
+        num_vertices, num_faces, num_edges = list(
+            map(int, f.readline().split()))
 
         # List of vertices: X, Y and Z coordinates
         vertices = []
@@ -66,4 +77,43 @@ def read_file(file):
         }
 
 
-print(read_file(model_details[models[0]]['file']))
+def convert_to_camera_coords(world_coords, camera_position):
+    return [world_coords[i]-camera_position[i] for i in range(len(world_coords))]
+
+
+class Object:
+    def __init__(self, num_vertices, num_faces, num_edges, vertices, faces):
+        self.num_vertices = num_vertices
+        self.num_faces = num_faces
+        self.num_edges = num_edges
+        self.vertices = {
+            'world_coords': vertices,
+            'camera_coords': []
+        }
+        self.faces = {
+            'world_coords': faces,
+            'camera_coords': [],
+        }
+
+    def get_camera_coords(self, camera_position):
+        self.vertices['camera_coords'] = [
+            convert_to_camera_coords(v, camera_position) for v in self.vertices['world_coords']]
+        self.faces['camera_coords'] = [
+            convert_to_camera_coords(v, camera_position) for v in self.faces['world_coords']]
+
+    def __str__(self):
+        return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'
+
+
+if __name__ == '__main__':
+    # Select model to use
+    model = MODELS[3]
+    model_details = MODEL_DETAILS[model]
+    
+    # Create model object
+    obj = Object(*read_file(model_details['file']).values())
+    print(obj.faces['world_coords'][:10])
+
+    # Get camera coordinates
+    obj.get_camera_coords(model_details['camera'])
+    print(obj.faces['camera_coords'][:10])
