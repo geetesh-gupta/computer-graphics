@@ -14,7 +14,7 @@ from scene import Scene
 # Perform the normalized device coordinate transformation (use inbuilt function for this purpose).
 # Now, use the back-face culling algorithm to remove the invisible triangles.
 # Place a light source at the locations specified.
-# TODO: Use the Phong shading algorithm with highlights to find the intensity of at each pixel.
+# Use the Phong shading algorithm with highlights to find the intensity of at each pixel.
 # TODO: Now, use any of the triangle rsterization algorithm to render the object.
 # TODO: Determine the window and viewport sizes accordingly.
 # TODO: Compare your results with the results obtained by using inbuilt functions to perform these steps.
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
     print(f"Camera Coords: {obj.vertices[Coords.CAMERA][:3]}")
     print("---Face 1---")
-    for vertex_index, i in enumerate(obj.faces[Face.INDICES][0]):
+    for i, vertex_index in enumerate(obj.faces[Face.INDICES][0]):
         print(
             f"Vertex {i+1} World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
         print(
@@ -50,3 +50,4 @@ if __name__ == '__main__':
     print("------------")
     print(f"View Frustum: {obj.view_frustum}")
     print(f"Faces Visible: {obj.faces[Face.VISIBLE][:10]}")
+    print(f"Intensity via Phong Shading: {obj.faces[Face.LIGHT_INTENSITY][:10]}")

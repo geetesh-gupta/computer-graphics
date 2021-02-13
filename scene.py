@@ -4,7 +4,7 @@ class Scene:
         self.camera_direction = camera_direction
         self.light_source_pos = light_source_pos
         self.object = None
-    
+
     def add_object(self, obj):
         self.object = obj
 
@@ -14,3 +14,5 @@ class Scene:
         self.object.get_view_frustum(self.camera_pos)
         self.object.get_normalized_coords()
         self.object.backface_detection(self.camera_direction)
+        self.object.apply_phong_shading(
+            self.camera_direction, self.light_source_pos)

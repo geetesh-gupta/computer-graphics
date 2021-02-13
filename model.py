@@ -15,7 +15,8 @@ class Object:
         self.faces = {
             Face.INDICES: np.array(faces),
             Face.NORMAL: [],
-            Face.VISIBLE: []
+            Face.VISIBLE: [],
+            Face.LIGHT_INTENSITY: []
         }
         self.view_frustum = None
 
@@ -30,7 +31,8 @@ class Object:
             side1 = vertices[1] - vertices[0]
             side2 = vertices[2] - vertices[0]
             normal = np.cross(side1, side2)
-            self.faces[Face.NORMAL].append(normal)
+            unit_normal = normal/np.linalg.norm(normal)
+            self.faces[Face.NORMAL].append(unit_normal)
 
     def get_view_frustum(self, camera_pos):
         l = float('inf')
@@ -67,7 +69,8 @@ class Object:
         ])
         for v in self.vertices[Coords.CAMERA]:
             print(v)
-            clip_coords = np.dot(normalization_matrix, np.array([*v, 1]).transpose())
+            clip_coords = np.dot(normalization_matrix,
+                                 np.array([*v, 1]).transpose())
             normalized_coords = clip_coords/clip_coords[3]
             self.vertices[Coords.NORMALIZED].append(normalized_coords[:-1])
 
@@ -75,6 +78,19 @@ class Object:
         for face_normal in self.faces[Face.NORMAL]:
             self.faces[Face.VISIBLE].append(np.dot(
                 camera_direction, face_normal) > 0)
+
+    def apply_phong_shading(self, camera_direction, light_source_pos):
+        for i, face in enumerate(self.faces[Face.INDICES]):
+            vertices = [self.vertices[Coords.CAMERA][vertex_index]
+                        for vertex_index in face]
+            centroid = sum(vertices)/3
+            light_direction = (centroid - light_source_pos)
+            n = self.faces[Face.NORMAL][i]
+            l = light_direction / np.linalg.norm(light_direction)
+            e = camera_direction/np.linalg.norm(camera_direction)
+            h = (e+l)/np.linalg.norm(e+l)
+            c = max(0, np.dot(n, l)) + np.dot(h, n)
+            self.faces[Face.LIGHT_INTENSITY].append(c)
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'

@@ -18,6 +18,7 @@ class Face(Enum):
     INDICES = 1
     NORMAL = 2
     VISIBLE = 3
+    LIGHT_INTENSITY = 4
 
 class FileDetails(Enum):
     FILE_PATH = 1
