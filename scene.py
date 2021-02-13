@@ -5,6 +5,7 @@ class Scene:
         self.light_source_pos = light_source_pos
         self.object = None
         self.viewport = viewport
+        self.display_coords = None
 
     def add_object(self, obj):
         self.object = obj
@@ -18,3 +19,4 @@ class Scene:
         self.object.apply_phong_shading(
             self.camera_direction, self.light_source_pos)
         self.object.window_viewport_transformation(self.viewport)
+        self.display_coords = self.object.get_display_coords(self.viewport)

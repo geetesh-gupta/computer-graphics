@@ -1,6 +1,6 @@
 from common import Coords, Face
 import numpy as np
-from triangle import getTriangleMatrixFromAlgo
+from triangle import getTriangleMatrix
 
 
 class Object:
@@ -95,15 +95,26 @@ class Object:
             self.faces[Face.LIGHT_INTENSITY].append(c)
 
     def window_viewport_transformation(self, viewport):
+        self.vertices[Coords.VIEWPORT] = np.empty(
+            [len(self.vertices[Coords.CAMERA]), 2], dtype=int)
         for i, face in enumerate(self.faces[Face.INDICES]):
             if self.faces[Face.VISIBLE][i]:
-                vertices = [self.vertices[Coords.NORMALIZED][vertex_index]
+                for vertex_index in face:
+                    v = self.vertices[Coords.NORMALIZED][vertex_index]
+                    viewport_coords = [viewport[0] *
+                                       (v[0]+1)/2, viewport[1]*(v[1]+1)/2]
+                    self.vertices[Coords.VIEWPORT][vertex_index] = viewport_coords
+
+    def get_display_coords(self, viewport):
+        display_matrix = np.zeros([viewport[1], viewport[0]])
+        for i, face in enumerate(self.faces[Face.INDICES]):
+            if self.faces[Face.VISIBLE][i]:
+                vertices = [self.vertices[Coords.VIEWPORT][vertex_index]
                             for vertex_index in face]
-                viewport_coords = [[viewport[0]*(v[0]+1)/2, viewport[1]*(v[1]+1)/2]
-                                   for v in vertices]
-                self.vertices[Coords.VIEWPORT].append(viewport_coords)
-            else:
-                None
+                v1, v2, v3 = vertices
+                getTriangleMatrix(
+                    *v1, *v2, *v3, *viewport, display_matrix, self.faces[Face.LIGHT_INTENSITY][i])
+        return display_matrix
 
     def __str__(self):
         return f'Vertices: {self.num_vertices}, Faces: {self.num_faces}'
