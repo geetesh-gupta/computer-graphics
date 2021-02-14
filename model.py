@@ -17,10 +17,11 @@ class Object:
         self.faces = {
             Face.INDICES: np.array(faces),
             Face.NORMAL: [],
-            Face.VISIBLE: [],
+            Face.VISIBLE: [True for _ in range(num_faces)],
             Face.LIGHT_INTENSITY: []
         }
         self.view_frustum = None
+        self.within_range = num_vertices
 
     def get_camera_coords(self, camera_position):
         self.vertices[Coords.CAMERA] = self.vertices[Coords.WORLD] - \
@@ -36,33 +37,28 @@ class Object:
             unit_normal = normal/np.linalg.norm(normal)
             self.faces[Face.NORMAL].append(unit_normal)
 
-    def get_view_frustum(self, camera_pos):
+    def get_view_frustum(self):
         l = float('inf')
         r = float('-inf')
         b = float('inf')
         t = float('-inf')
-        n = camera_pos[2]+1
-        f = float('-inf')
+        n = float('-inf')
+        f = float('inf')
         for vertex in self.vertices[Coords.CAMERA]:
             x, y, z = vertex
             l = min(l, x)
             r = max(r, x)
             b = min(b, y)
             t = max(t, y)
-            n = min(n, max(z, camera_pos[2]+1))
-            f = max(f, z)
-        # HACK: Workaround for zero sized frustum
-        if f-n <= 0:
-            f = n+1
-        if r-l <= 0:
-            r = l+1
-        if t-b <= 0:
-            t = b+1
+            n = max(n, min(z, -1))
+            f = min(f, min(z, -2))
 
         self.view_frustum = [l, r, b, t, n, f]
 
     def get_normalized_coords(self):
         l, r, b, t, n, f = self.view_frustum
+        n = -n
+        f = -f
         normalization_matrix = np.array([
             [2*n/(r-l), 0, (r+l)/(r-l), 0],
             [0, 2*n/(t-b), (t+b)/(t-b), 0],
@@ -75,10 +71,19 @@ class Object:
             normalized_coords = clip_coords/clip_coords[3]
             self.vertices[Coords.NORMALIZED].append(normalized_coords[:-1])
 
+    def clip_triangles(self):
+        for i, face in enumerate(self.faces[Face.INDICES]):
+            for vertex_index in face:
+                vertex = self.vertices[Coords.NORMALIZED][vertex_index]
+                if not ((vertex >= -1).all() and (vertex <= 1).all()):
+                    self.faces[Face.VISIBLE][i] = False
+                    break
+
     def backface_detection(self, camera_direction):
-        for face_normal in self.faces[Face.NORMAL]:
-            self.faces[Face.VISIBLE].append(np.dot(
-                camera_direction, face_normal) > 0)
+        for i, face_normal in enumerate(self.faces[Face.NORMAL]):
+            if self.faces[Face.VISIBLE][i]:
+                self.faces[Face.VISIBLE][i] = np.dot(
+                    camera_direction, face_normal) > 0
 
     def apply_phong_shading(self, camera_direction, light_source_pos):
         for i, face in enumerate(self.faces[Face.INDICES]):

@@ -1,8 +1,8 @@
-from enum import Enum
+from enum import Enum, IntEnum
 import numpy as np
 
 
-class Coords(Enum):
+class Coords(IntEnum):
     WORLD = 1
     CAMERA = 2
     NORMALIZED = 3
@@ -15,6 +15,8 @@ class Models(Enum):
     michael18 = 3
     wolf02 = 4
     triangle = 5
+    triangle2 = 6
+    dragon = 7
 
 
 class Face(Enum):
@@ -55,5 +57,15 @@ MODEL_DETAILS = {
         FileDetails.FILE_PATH: 'PA2_Models/triangle.off',
         FileDetails.CAMERA_POS: np.array([-1, 0, 0]),
         FileDetails.LIGHT_SOURCE_POS: np.array([1, 0, 0])
+    },
+    Models.triangle2: {
+        FileDetails.FILE_PATH: 'PA2_Models/triangle2.off',
+        FileDetails.CAMERA_POS: np.array([-1, 0, 0]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([1, 0, 0])
+    },
+    Models.dragon: {
+        FileDetails.FILE_PATH: 'PA2_Models/dragon.off',
+        FileDetails.CAMERA_POS: np.array([-3, 1, 2]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([10, 2, 5])
     },
 }

@@ -69,7 +69,7 @@ def render():
 
 if __name__ == '__main__':
     # Select model to use
-    model = Models.triangle
+    model = Models.wolf02
     model_details = MODEL_DETAILS[model]
     file_path = model_details[FileDetails.FILE_PATH]
     camera_pos = model_details[FileDetails.CAMERA_POS]
@@ -78,13 +78,14 @@ if __name__ == '__main__':
 
     # Create model object
     obj = Object(*read_off_file(file_path).values())
-    scene = Scene(camera_pos, camera_direction, light_source_pos, (WIDTH, HEIGHT))
+    scene = Scene(camera_pos, camera_direction,
+                  light_source_pos, (WIDTH, HEIGHT))
     scene.add_object(obj)
     scene.simulate_model()
     DISPLAY_MATRIX = scene.display_coords
 
     # Render openGL function
-    main(render)
+    # main(render)
 
     # # Display some values
     # print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
@@ -108,3 +109,13 @@ if __name__ == '__main__':
     # print("------------")
     # print(f"Display Coords:\n{scene.display_coords}")
     # print("------------")
+
+    import numpy as np
+    np.savetxt('out/WorldCoords.txt', obj.vertices[Coords.WORLD], fmt='%10.5f')
+    np.savetxt('out/CameraCoords.txt',
+               obj.vertices[Coords.CAMERA], fmt='%10.5f')
+    np.savetxt('out/NormalizedCoords.txt',
+               obj.vertices[Coords.NORMALIZED], fmt='%10.5f')
+    np.savetxt('out/ViewportCoords.txt',
+               obj.vertices[Coords.VIEWPORT], fmt='%10.5f')
+    np.savetxt('out/FacesVisible.txt', obj.faces[Face.VISIBLE], fmt='%1i')
