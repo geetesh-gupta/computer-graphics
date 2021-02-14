@@ -43,12 +43,12 @@ class Object:
         b = float('inf')
         t = float('-inf')
         n = float('-inf')
-        f = float('inf')
+        f = -2
         for vertex in self.vertices[Coords.CAMERA]:
             x, y, z = vertex
             r = max(r, abs(x))
-            t = max(r, abs(y))
-            f = max(r, abs(z))
+            t = max(t, abs(y))
+            f = min(f, z)
         l = -r
         b = -t
         n = -1
@@ -85,14 +85,14 @@ class Object:
         for i, face_normal in enumerate(self.faces[Face.NORMAL]):
             if self.faces[Face.VISIBLE][i]:
                 self.faces[Face.VISIBLE][i] = np.dot(
-                    camera_direction, face_normal) > 0
+                    camera_direction, face_normal) < 0
 
     def apply_phong_shading(self, camera_direction, light_source_pos):
         for i, face in enumerate(self.faces[Face.INDICES]):
             vertices = [self.vertices[Coords.CAMERA][vertex_index]
                         for vertex_index in face]
             centroid = sum(vertices)/3
-            light_direction = (centroid - light_source_pos)
+            light_direction = -(centroid - light_source_pos)
             n = self.faces[Face.NORMAL][i]
             l = light_direction / np.linalg.norm(light_direction)
             e = camera_direction/np.linalg.norm(camera_direction)

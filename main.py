@@ -6,6 +6,7 @@ from utils.read_write import read_off_file
 from common import MODEL_DETAILS, Models, Coords, FileDetails, Face
 from model import Object
 from scene import Scene
+from utils.display import displayFaceDetails
 
 # Consider any one of the meshes and the corresponding camera location from the below table.
 # Transform the object w.r.t. the camera coordinate system.
@@ -21,8 +22,8 @@ from scene import Scene
 
 
 DISPLAY_MATRIX = []
-HEIGHT = 300
-WIDTH = 300
+HEIGHT = 500
+WIDTH = 500
 
 
 def init():
@@ -90,34 +91,15 @@ if __name__ == '__main__':
     for coord in Coords:
         print(f"{str(coord)}:\n{obj.vertices[coord]}")
     print(f"View Frustum: {obj.view_frustum}")
-    for j, face in enumerate(obj.faces[Face.INDICES]):
-        print(f"-----Face {j+1}-----")
-        print(f"Normal: {obj.faces[Face.NORMAL][j]}")
-        print(f"Visible: {obj.faces[Face.VISIBLE][j]}")
-        print(f"Intensity: {obj.faces[Face.LIGHT_INTENSITY][j]}")
-        for i, vertex_index in enumerate(obj.faces[Face.INDICES][0]):
-            print(f"Vertex {chr(ord('A')+vertex_index)}")
-            print(
-                f"\tWorld Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
-            print(
-                f"\tCamera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
-            print(
-                f"\tNormalized Coords: {obj.vertices[Coords.NORMALIZED][vertex_index]}")
-    print("------------")
-    # print(f"Faces Visible:\n{obj.faces[Face.VISIBLE]}")
-    # print(f"Phong Shading Intensity: {obj.faces[Face.LIGHT_INTENSITY]}")
-    # print(f"Display Coords:\n{scene.display_coords}")
-    # print("------------")
+    for j, visible in enumerate(obj.faces[Face.VISIBLE]):
+        print(
+            f"Face {j+1}: {obj.faces[Face.VISIBLE][j]} {obj.faces[Face.NORMAL][j]}")
+        # if visible:
+        #     print(f"\tFace {j+1} with normal {obj.faces[Face.NORMAL][j]}")
 
-    # import numpy as np
-    # np.savetxt('out/WorldCoords.txt', obj.vertices[Coords.WORLD], fmt='%10.5f')
-    # np.savetxt('out/CameraCoords.txt',
-    #            obj.vertices[Coords.CAMERA], fmt='%10.5f')
-    # np.savetxt('out/NormalizedCoords.txt',
-    #            obj.vertices[Coords.NORMALIZED], fmt='%10.5f')
-    # np.savetxt('out/ViewportCoords.txt',
-    #            obj.vertices[Coords.VIEWPORT], fmt='%10.5f')
-    # np.savetxt('out/VisibleFaces.txt', obj.faces[Face.VISIBLE], fmt='%1i')
+    # displayFaceDetails(obj)
+    # print(f"Display Coords:\n{scene.display_coords}")
+    print(f"Phong Shading Intensity: {obj.faces[Face.LIGHT_INTENSITY]}")
 
     # Render openGL function
     # main(render)

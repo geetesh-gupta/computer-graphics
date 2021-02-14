@@ -17,214 +17,34 @@ Coords.CAMERA:
  [-2.  4. -5.]
  [-2.  4. -2.]]
 Coords.NORMALIZED:
-[[ 0.125       0.         -0.11111111]
- [ 0.2         0.          0.42222222]
- [-0.05        0.          0.42222222]
- [-0.125       0.         -0.11111111]
- [ 0.125       0.25       -0.11111111]
- [ 0.2         0.1         0.42222222]
- [-0.05        0.1         0.42222222]
- [-0.125       0.25       -0.11111111]]
+[[ 0.125  0.     0.25 ]
+ [ 0.2    0.     1.   ]
+ [-0.05   0.     1.   ]
+ [-0.125  0.     0.25 ]
+ [ 0.125  0.5    0.25 ]
+ [ 0.2    0.2    1.   ]
+ [-0.05   0.2    1.   ]
+ [-0.125  0.5    0.25 ]]
 Coords.VIEWPORT:
-[[  0   0]
- [180 150]
- [142 150]
+[[281 250]
+ [300 250]
  [  0   0]
+ [218 250]
+ [281 375]
+ [300 300]
  [  0   0]
- [180 165]
- [142 165]
- [  0   0]]
-View Frustum: [-8.0, 8.0, -8.0, 8.0, -1, 8.0]
------Face 1-----
-Normal: [ 0. -0.  1.]
-Visible: False
-Intensity: -0.9945017619261683
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 2-----
-Normal: [0. 0. 1.]
-Visible: False
-Intensity: -0.9825499058759473
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 3-----
-Normal: [0.4472136  0.         0.89442719]
-Visible: False
-Intensity: -0.7257457573757118
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 4-----
-Normal: [ 0.4472136  -0.          0.89442719]
-Visible: False
-Intensity: -0.7624425757515654
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 5-----
-Normal: [ 0.  0. -1.]
-Visible: True
-Intensity: 1.8742273632821536
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 6-----
-Normal: [-0.  0. -1.]
-Visible: True
-Intensity: 1.9478386843780089
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 7-----
-Normal: [0. 1. 0.]
-Visible: False
-Intensity: 0.0
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 8-----
-Normal: [0. 1. 0.]
-Visible: False
-Intensity: 0.0
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 9-----
-Normal: [-1.  0.  0.]
-Visible: False
-Intensity: 0.36042537362656135
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 10-----
-Normal: [-1.  0. -0.]
-Visible: False
-Intensity: 0.31424333974543595
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 11-----
-Normal: [0. 1. 0.]
-Visible: False
-Intensity: 0.650946223569759
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
------Face 12-----
-Normal: [0. 1. 0.]
-Visible: False
-Intensity: 0.6086274058960132
-Vertex A
-	World Coords: [ 2.  0. -2.]
-	Camera Coords: [ 2.  0. -2.]
-	Normalized Coords: [ 0.125       0.         -0.11111111]
-Vertex E
-	World Coords: [ 2.  4. -2.]
-	Camera Coords: [ 2.  4. -2.]
-	Normalized Coords: [ 0.125       0.25       -0.11111111]
-Vertex D
-	World Coords: [-2.  0. -2.]
-	Camera Coords: [-2.  0. -2.]
-	Normalized Coords: [-0.125       0.         -0.11111111]
-------------
+ [218 375]]
+View Frustum: [-8.0, 8.0, -4.0, 4.0, -1, -5.0]
+Face 1: True [ 0. -0.  1.]
+Face 2: True [0. 0. 1.]
+Face 3: True [0.4472136  0.         0.89442719]
+Face 4: True [ 0.4472136  -0.          0.89442719]
+Face 5: False [ 0.  0. -1.]
+Face 6: False [-0.  0. -1.]
+Face 7: False [0. 1. 0.]
+Face 8: False [0. 1. 0.]
+Face 9: False [-1.  0.  0.]
+Face 10: False [-1.  0. -0.]
+Face 11: False [0. 1. 0.]
+Face 12: False [0. 1. 0.]
+Phong Shading Intensity: [0.9886299214494144, 0.9786594673784315, 0.376312535769168, 0.46252898783277846, 0.03460488800219546, 0.02128141545254866, 0.0, 0.0, -0.8319204479934982, -0.599825247066655, -0.8315322421017602, -0.9482416284713621]

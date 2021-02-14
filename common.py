@@ -72,6 +72,6 @@ MODEL_DETAILS = {
     Models.cube: {
         FileDetails.FILE_PATH: 'PA2_Models/cube.off',
         FileDetails.CAMERA_POS: np.array([0, 0, 0]),
-        FileDetails.LIGHT_SOURCE_POS: np.array([0, 0, 5])
+        FileDetails.LIGHT_SOURCE_POS: np.array([0, 0, 65])
     },
 }
