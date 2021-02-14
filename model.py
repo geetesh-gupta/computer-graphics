@@ -46,13 +46,12 @@ class Object:
         f = float('inf')
         for vertex in self.vertices[Coords.CAMERA]:
             x, y, z = vertex
-            l = min(l, x)
-            r = max(r, x)
-            b = min(b, y)
-            t = max(t, y)
-            n = max(n, min(z, -1))
-            f = min(f, min(z, -2))
-
+            r = max(r, abs(x))
+            t = max(r, abs(y))
+            f = max(r, abs(z))
+        l = -r
+        b = -t
+        n = -1
         self.view_frustum = [l, r, b, t, n, f]
 
     def get_normalized_coords(self):
@@ -65,11 +64,14 @@ class Object:
             [0, 0, (n+f)/(n-f), 2*f*n/(n-f)],
             [0, 0, -1, 0]
         ])
-        for v in self.vertices[Coords.CAMERA]:
+
+        self.vertices[Coords.NORMALIZED] = np.zeros(
+            [len(self.vertices[Coords.CAMERA]), 3])
+        for i, v in enumerate(self.vertices[Coords.CAMERA]):
             clip_coords = np.dot(normalization_matrix,
                                  np.array([*v, 1]).transpose())
             normalized_coords = clip_coords/clip_coords[3]
-            self.vertices[Coords.NORMALIZED].append(normalized_coords[:-1])
+            self.vertices[Coords.NORMALIZED][i] = (normalized_coords[:-1])
 
     def clip_triangles(self):
         for i, face in enumerate(self.faces[Face.INDICES]):

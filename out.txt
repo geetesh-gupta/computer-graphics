@@ -1,0 +1,230 @@
+Coords.WORLD:
+[[ 2.  0. -2.]
+ [ 8.  0. -5.]
+ [-2.  0. -5.]
+ [-2.  0. -2.]
+ [ 2.  4. -2.]
+ [ 8.  4. -5.]
+ [-2.  4. -5.]
+ [-2.  4. -2.]]
+Coords.CAMERA:
+[[ 2.  0. -2.]
+ [ 8.  0. -5.]
+ [-2.  0. -5.]
+ [-2.  0. -2.]
+ [ 2.  4. -2.]
+ [ 8.  4. -5.]
+ [-2.  4. -5.]
+ [-2.  4. -2.]]
+Coords.NORMALIZED:
+[[ 0.125       0.         -0.11111111]
+ [ 0.2         0.          0.42222222]
+ [-0.05        0.          0.42222222]
+ [-0.125       0.         -0.11111111]
+ [ 0.125       0.25       -0.11111111]
+ [ 0.2         0.1         0.42222222]
+ [-0.05        0.1         0.42222222]
+ [-0.125       0.25       -0.11111111]]
+Coords.VIEWPORT:
+[[  0   0]
+ [180 150]
+ [142 150]
+ [  0   0]
+ [  0   0]
+ [180 165]
+ [142 165]
+ [  0   0]]
+View Frustum: [-8.0, 8.0, -8.0, 8.0, -1, 8.0]
+-----Face 1-----
+Normal: [ 0. -0.  1.]
+Visible: False
+Intensity: -0.9945017619261683
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 2-----
+Normal: [0. 0. 1.]
+Visible: False
+Intensity: -0.9825499058759473
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 3-----
+Normal: [0.4472136  0.         0.89442719]
+Visible: False
+Intensity: -0.7257457573757118
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 4-----
+Normal: [ 0.4472136  -0.          0.89442719]
+Visible: False
+Intensity: -0.7624425757515654
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 5-----
+Normal: [ 0.  0. -1.]
+Visible: True
+Intensity: 1.8742273632821536
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 6-----
+Normal: [-0.  0. -1.]
+Visible: True
+Intensity: 1.9478386843780089
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 7-----
+Normal: [0. 1. 0.]
+Visible: False
+Intensity: 0.0
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 8-----
+Normal: [0. 1. 0.]
+Visible: False
+Intensity: 0.0
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 9-----
+Normal: [-1.  0.  0.]
+Visible: False
+Intensity: 0.36042537362656135
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 10-----
+Normal: [-1.  0. -0.]
+Visible: False
+Intensity: 0.31424333974543595
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 11-----
+Normal: [0. 1. 0.]
+Visible: False
+Intensity: 0.650946223569759
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+-----Face 12-----
+Normal: [0. 1. 0.]
+Visible: False
+Intensity: 0.6086274058960132
+Vertex A
+	World Coords: [ 2.  0. -2.]
+	Camera Coords: [ 2.  0. -2.]
+	Normalized Coords: [ 0.125       0.         -0.11111111]
+Vertex E
+	World Coords: [ 2.  4. -2.]
+	Camera Coords: [ 2.  4. -2.]
+	Normalized Coords: [ 0.125       0.25       -0.11111111]
+Vertex D
+	World Coords: [-2.  0. -2.]
+	Camera Coords: [-2.  0. -2.]
+	Normalized Coords: [-0.125       0.         -0.11111111]
+------------

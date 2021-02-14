@@ -17,6 +17,7 @@ class Models(Enum):
     triangle = 5
     triangle2 = 6
     dragon = 7
+    cube = 8
 
 
 class Face(Enum):
@@ -67,5 +68,10 @@ MODEL_DETAILS = {
         FileDetails.FILE_PATH: 'PA2_Models/dragon.off',
         FileDetails.CAMERA_POS: np.array([-3, 1, 2]),
         FileDetails.LIGHT_SOURCE_POS: np.array([10, 2, 5])
+    },
+    Models.cube: {
+        FileDetails.FILE_PATH: 'PA2_Models/cube.off',
+        FileDetails.CAMERA_POS: np.array([0, 0, 0]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([0, 0, 5])
     },
 }
