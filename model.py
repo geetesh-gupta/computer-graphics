@@ -70,7 +70,6 @@ class Object:
             [0, 0, -1, 0]
         ])
         for v in self.vertices[Coords.CAMERA]:
-            print(v)
             clip_coords = np.dot(normalization_matrix,
                                  np.array([*v, 1]).transpose())
             normalized_coords = clip_coords/clip_coords[3]
@@ -95,7 +94,7 @@ class Object:
             self.faces[Face.LIGHT_INTENSITY].append(c)
 
     def window_viewport_transformation(self, viewport):
-        self.vertices[Coords.VIEWPORT] = np.empty(
+        self.vertices[Coords.VIEWPORT] = np.zeros(
             [len(self.vertices[Coords.CAMERA]), 2], dtype=int)
         for i, face in enumerate(self.faces[Face.INDICES]):
             if self.faces[Face.VISIBLE][i]:

@@ -20,6 +20,53 @@ from scene import Scene
 # TODO: Compare your results with the results obtained by using inbuilt functions to perform these steps.
 
 
+DISPLAY_MATRIX = []
+HEIGHT = 100
+WIDTH = 100
+
+
+def init():
+    glClearColor(0.0, 0.0, 0.0, 0.0)
+    glMatrixMode(GL_PROJECTION)
+    # gluOrtho2D(-WIDTH, WIDTH, -HEIGHT, HEIGHT)
+    gluOrtho2D(0, WIDTH, 0, HEIGHT)
+
+
+def main(func):
+    glutInit(sys.argv)
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+    glutInitWindowPosition(10, 30)
+    glutInitWindowSize(500, 500)
+    glutCreateWindow("Display Mesh")
+    init()
+    glutDisplayFunc(func)
+    glutMainLoop()
+
+
+def render():
+    glClear(GL_COLOR_BUFFER_BIT)
+    glBegin(GL_POINTS)
+    if len(DISPLAY_MATRIX) != 0:
+        for i in range(HEIGHT):
+            for j in range(WIDTH):
+                # Get the averaged pixel value
+                pixelValue = DISPLAY_MATRIX[i][j]
+
+                # Red Colored Triangle
+                curColorArr = [1.0, 0.0, 0.0]
+
+                # Modify color values based on averaged pixel value
+                newColorArr = [k*pixelValue for k in curColorArr]
+
+                # Set the color of the pixels
+                glColor3f(newColorArr[0], newColorArr[1], newColorArr[2])
+
+                # Draw the vertex
+                glVertex2i(j, HEIGHT-i)
+    glEnd()
+    glFlush()
+
+
 if __name__ == '__main__':
     # Select model to use
     model = Models.triangle
@@ -31,29 +78,33 @@ if __name__ == '__main__':
 
     # Create model object
     obj = Object(*read_off_file(file_path).values())
-    scene = Scene(camera_pos, camera_direction, light_source_pos, (5, 5))
+    scene = Scene(camera_pos, camera_direction, light_source_pos, (WIDTH, HEIGHT))
     scene.add_object(obj)
     scene.simulate_model()
+    DISPLAY_MATRIX = scene.display_coords
 
-    # Display some values
-    print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
-    print(f"Camera Coords: {obj.vertices[Coords.CAMERA][:3]}")
-    print("---Face 1---")
-    for i, vertex_index in enumerate(obj.faces[Face.INDICES][0]):
-        print(
-            f"Vertex {i+1} World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
-        print(
-            f"Vertex {i+1} Camera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
-        print(
-            f"Vertex {i+1} Normalized Coords: {obj.vertices[Coords.NORMALIZED][vertex_index]}")
-    print(f"Face Normal: {obj.faces[Face.NORMAL][0]}")
-    print("------------")
-    print(f"View Frustum: {obj.view_frustum}")
-    print(f"Faces Visible: {obj.faces[Face.VISIBLE][:10]}")
-    print(
-        f"Intensity via Phong Shading: {obj.faces[Face.LIGHT_INTENSITY][:10]}")
-    print("------------")
-    print(f"Viewport Coords: {obj.vertices[Coords.VIEWPORT][:3]}")
-    print("------------")
-    print(f"Display Coords:\n{scene.display_coords}")
-    print("------------")
+    # Render openGL function
+    main(render)
+
+    # # Display some values
+    # print(f"World Coords: {obj.vertices[Coords.WORLD][:3]}")
+    # print(f"Camera Coords: {obj.vertices[Coords.CAMERA][:3]}")
+    # print("---Face 1---")
+    # for i, vertex_index in enumerate(obj.faces[Face.INDICES][0]):
+    #     print(
+    #         f"Vertex {i+1} World Coords: {obj.vertices[Coords.WORLD][vertex_index]}")
+    #     print(
+    #         f"Vertex {i+1} Camera Coords: {obj.vertices[Coords.CAMERA][vertex_index]}")
+    #     print(
+    #         f"Vertex {i+1} Normalized Coords: {obj.vertices[Coords.NORMALIZED][vertex_index]}")
+    # print(f"Face Normal: {obj.faces[Face.NORMAL][0]}")
+    # print("------------")
+    # print(f"View Frustum: {obj.view_frustum}")
+    # print(f"Faces Visible: {obj.faces[Face.VISIBLE][:10]}")
+    # print(
+    #     f"Intensity via Phong Shading: {obj.faces[Face.LIGHT_INTENSITY][:10]}")
+    # print("------------")
+    # print(f"Viewport Coords: {obj.vertices[Coords.VIEWPORT][:3]}")
+    # print("------------")
+    # print(f"Display Coords:\n{scene.display_coords}")
+    # print("------------")
