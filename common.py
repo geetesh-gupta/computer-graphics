@@ -51,8 +51,8 @@ MODEL_DETAILS = {
     },
     Models.wolf02: {
         FileDetails.FILE_PATH: 'PA2_Models/wolf02.off',
-        FileDetails.CAMERA_POS: np.array([-60, -120, 10]),
-        FileDetails.LIGHT_SOURCE_POS: np.array([-60, -120, 100])
+        FileDetails.CAMERA_POS: np.array([0, 0, 100]),
+        FileDetails.LIGHT_SOURCE_POS: np.array([0, 0, 500])
     },
     Models.triangle: {
         FileDetails.FILE_PATH: 'PA2_Models/triangle.off',

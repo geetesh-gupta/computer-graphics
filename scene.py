@@ -12,9 +12,9 @@ class Scene:
 
     def simulate_model(self):
         self.object.get_camera_coords(self.camera_pos)
-        self.object.get_face_normals()
         self.object.get_view_frustum()
         self.object.get_normalized_coords()
+        self.object.get_face_normals()
         self.object.clip_triangles()
         self.object.backface_detection(self.camera_direction)
         self.object.apply_phong_shading(

@@ -102,4 +102,4 @@ if __name__ == '__main__':
     print(f"Phong Shading Intensity: {obj.faces[Face.LIGHT_INTENSITY]}")
 
     # Render openGL function
-    # main(render)
+    main(render)

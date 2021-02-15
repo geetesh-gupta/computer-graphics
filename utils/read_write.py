@@ -20,8 +20,8 @@ def read_off_file(file):
         # List of vertices: X, Y and Z coordinates
         vertices = []
         for _ in range(num_vertices):
-            vertices.append(list(
-                map(float, f.readline().split())))
+            v = list(map(float, f.readline().split()))
+            vertices.append([*v[:-1], v[-1]])
 
         # List of faces: number of vertices, followed by the indexes of the composing vertices, in order (indexed from zero).
         faces = []

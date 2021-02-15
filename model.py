@@ -29,7 +29,7 @@ class Object:
 
     def get_face_normals(self):
         for face in self.faces[Face.INDICES]:
-            vertices = [self.vertices[Coords.WORLD][vertex_index]
+            vertices = [self.vertices[Coords.CAMERA][vertex_index]
                         for vertex_index in face]
             side1 = vertices[1] - vertices[0]
             side2 = vertices[2] - vertices[0]
@@ -84,6 +84,10 @@ class Object:
     def backface_detection(self, camera_direction):
         for i, face_normal in enumerate(self.faces[Face.NORMAL]):
             if self.faces[Face.VISIBLE][i]:
+                vertices = [self.vertices[Coords.CAMERA][vertex_index]
+                        for vertex_index in self.faces[Face.INDICES][i]]
+                centroid = sum(vertices)/3
+                eye_direction = centroid - camera_direction
                 self.faces[Face.VISIBLE][i] = np.dot(
                     camera_direction, face_normal) < 0
 
