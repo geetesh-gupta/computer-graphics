@@ -6,8 +6,8 @@ DISPLAY_MATRIX = []
 FACE_VERTICES = []
 FACE_INTENSITIES = []
 WINDOW_POS = [0, 0]
-HEIGHT = 1000
-WIDTH = 1000
+HEIGHT = 500
+WIDTH = 500
 
 
 def init():
@@ -33,7 +33,7 @@ def render3D():
     glMatrixMode(GL_MODELVIEW)
 
     glLoadIdentity()
-    glTranslatef(0.0, -0.4, -10.0)
+    glTranslatef(0.0, -0.4, -5.0)
     glColor3f(1.0, 0.0, 0.0)
     for i in range(len(FACE_VERTICES)):
         # Set color
@@ -44,7 +44,7 @@ def render3D():
         scale_factor = 50
         v1, v2, v3 = FACE_VERTICES[i]
 
-        # # Draw triangle
+        # Draw triangle
         glBegin(GL_TRIANGLES)
         glVertex3f(*v1/scale_factor)
         glVertex3f(*v2/scale_factor)
@@ -86,27 +86,25 @@ if __name__ == '__main__':
     from face import rasterization, face_detection_and_shading, get_visible_face_coords
 
     # Cube
-    model_enum = Models.cube
-    camera_pos = np.array([0, 0, 1])
-    light_source_pos = np.array([0, 0, 10])
-    view_frustum = np.array([-5, 5, -5, 5, 2, 10])
+    # model_enum = Models.cube
+    # camera_pos = np.array([0, 0, 1])
+    # light_source_pos = np.array([0, 0, 10])
+    # view_frustum = np.array([-5, 5, -5, 5, 2, 10])
 
     # Wolf
     model_enum = Models.wolf02
-    camera_pos = np.array([0, 0, 100])
-    light_source_pos = np.array([0, 0, 150])
     view_frustum = np.array([-20, 20, -20, 20, 2, 100])
 
     # Cat
     # model_enum = Models.cat01
-    # camera_pos = np.array([50, -60, 10])
-    # light_source_pos = np.array([-50, -60, 160])
+    # camera_pos = np.array([0, 0, 1])
+    # light_source_pos = np.array([0, 0, 10])
     # view_frustum = np.array([-20, 20, -40, 40, 2, 130])
 
     model_details = MODEL_DETAILS[model_enum]
     file_path = model_details[FileDetails.FILE_PATH]
-    # camera_pos = model_details[FileDetails.CAMERA_POS]
-    # light_source_pos = model_details[FileDetails.LIGHT_SOURCE_POS]
+    camera_pos = model_details[FileDetails.CAMERA_POS]
+    light_source_pos = model_details[FileDetails.LIGHT_SOURCE_POS]
     camera_direction = [0, 0, -1]
 
     # Create model object
@@ -122,10 +120,8 @@ if __name__ == '__main__':
     [FACE_VERTICES, FACE_INTENSITIES] = get_visible_face_coords(
         faces_visible, window_coords, faces, face_intensities)
 
-    print(np.array(FACE_VERTICES))
+    # print(np.array(FACE_VERTICES))
     # print(np.array(FACE_INTENSITIES))
-    # display_coords = rasterization(face_vertices, (WIDTH, HEIGHT))
-    # DISPLAY_MATRIX = display_coords
 
     # Render openGL function
     main(render3D)

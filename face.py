@@ -31,10 +31,12 @@ def rasterization(face_vertices, window_size):
     return display_matrix
 
 
-def backface_detection(camera_direction, faces_normals):
+def backface_detection(camera_direction, faces_normals, face_eye_coords):
     visible_faces = []
-    for face_normal in faces_normals:
-        if np.dot(camera_direction, face_normal) < 0:
+    for i, vertices in enumerate(face_eye_coords):
+        centroid = sum(vertices)/3
+        face_normal = faces_normals[i]
+        if np.dot(centroid - camera_direction, face_normal) < 0:
             visible_faces.append(True)
         else:
             visible_faces.append(False)
@@ -57,10 +59,12 @@ def apply_phong_shading(camera_direction, light_source_pos, face_normals, face_e
 
 def face_detection_and_shading(faces, vertices, camera_pos, camera_direction, light_source_pos):
     vertices = vertices - camera_pos
+    face_vertices = get_face_vertices(faces, vertices)
     face_normals = get_face_normals(faces, vertices, camera_pos)
-    faces_visible = backface_detection(camera_direction, face_normals)
+    faces_visible = backface_detection(
+        camera_direction, face_normals, face_vertices)
     face_intensities = apply_phong_shading(
-        camera_direction, light_source_pos, face_normals, get_face_vertices(faces, vertices))
+        camera_direction, light_source_pos, face_normals, face_vertices)
     return [faces_visible, face_intensities]
 
 
