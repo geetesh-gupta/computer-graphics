@@ -5,15 +5,12 @@ from triangle import getTriangleMatrix
 
 def get_face_normals(faces, vertices, camera_coords):
     normals = []
-    nmvm = normal_model_view_matrix(*camera_coords)
     for face in faces:
-        v = [vertices[i] for i in face]
+        v = [(vertices[i]-camera_coords) for i in face]
         side1 = v[1] - v[0]
         side2 = v[2] - v[0]
         normal = np.cross(side1, side2)
         unit_normal = normal/np.linalg.norm(normal)
-        # normal_cc = np.matmul(
-        #     nmvm, homogeneous_coords(*unit_normal).transpose())
         normals.append(unit_normal)
     return np.array(normals)
 
@@ -59,13 +56,11 @@ def apply_phong_shading(camera_direction, light_source_pos, face_normals, face_e
 
 
 def face_detection_and_shading(faces, vertices, camera_pos, camera_direction, light_source_pos):
-    ec = []
-    for v in vertices:
-        ec.append(get_eye_coords(v, camera_pos))
+    vertices = vertices - camera_pos
     face_normals = get_face_normals(faces, vertices, camera_pos)
     faces_visible = backface_detection(camera_direction, face_normals)
     face_intensities = apply_phong_shading(
-        camera_direction, light_source_pos, face_normals, get_face_vertices(faces, ec))
+        camera_direction, light_source_pos, face_normals, get_face_vertices(faces, vertices))
     return [faces_visible, face_intensities]
 
 

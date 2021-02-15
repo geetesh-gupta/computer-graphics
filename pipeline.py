@@ -54,10 +54,10 @@ def transform_vertex(object_coords, camera_coords, view_frustum, window_pos, win
     l, r, b, t, n, f = view_frustum
     hc = homogeneous_coords(*object_coords)
     mvc = np.matmul(model_view_matrix(*camera_coords), hc.transpose())
-    pc = np.matmul(projection_matrix(*view_frustum), mvc)
-    ndc = normalized_device_coords(pc)
-    wc = viewport_matrix(window_pos, window_size, (n, f), ndc)
-    wc2d = coords_in_2d(*wc)
+    # pc = np.matmul(projection_matrix(*view_frustum), mvc)
+    ndc = normalized_device_coords(mvc)
+    # wc = viewport_matrix(window_pos, window_size, (n, f), ndc)
+    # wc2d = coords_in_2d(*wc)
     # print("-------------")
     # print(object_coords)
     # print(hc)
@@ -67,7 +67,7 @@ def transform_vertex(object_coords, camera_coords, view_frustum, window_pos, win
     # print(wc)
     # print(wc2d)
     # print("-------------")
-    return wc2d
+    return ndc
 
 
 def get_eye_coords(object_coords, camera_coords):
@@ -75,6 +75,7 @@ def get_eye_coords(object_coords, camera_coords):
     mvc = np.matmul(model_view_matrix(*camera_coords), hc.transpose())
     nc = normalized_device_coords(mvc)
     return nc
+
 
 def viewing_pipeline(object_coords, camera_coords, window_pos, window_size, view_frustum):
     window_coords = []

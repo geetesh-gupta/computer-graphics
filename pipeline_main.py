@@ -1,4 +1,3 @@
-
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
@@ -7,14 +6,14 @@ DISPLAY_MATRIX = []
 FACE_VERTICES = []
 FACE_INTENSITIES = []
 WINDOW_POS = [0, 0]
-HEIGHT = 200
-WIDTH = 200
+HEIGHT = 1000
+WIDTH = 1000
 
 
 def init():
-    glClearColor(0.0, 0.0, 0.0, 0.0)
-    glMatrixMode(GL_PROJECTION)
-    gluOrtho2D(0, WIDTH, 0, HEIGHT)
+    glClearColor(0.0, 0.0, 0.0, 1.0)
+    glClearDepth(1.0)
+    glEnable(GL_DEPTH_TEST)
 
 
 def main(func):
@@ -23,44 +22,60 @@ def main(func):
     glutInitWindowPosition(*WINDOW_POS)
     glutInitWindowSize(WIDTH, HEIGHT)
     glutCreateWindow("Pipeline")
+    glutReshapeFunc(reshape)
     init()
     glutDisplayFunc(func)
     glutMainLoop()
 
 
-def renderGLTriangle():
-    glClear(GL_COLOR_BUFFER_BIT)
+def render3D():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glMatrixMode(GL_MODELVIEW)
+
+    glLoadIdentity()
+    glTranslatef(0.0, -0.4, -10.0)
+    glColor3f(1.0, 0.0, 0.0)
     for i in range(len(FACE_VERTICES)):
         # Set color
         pixelValue = FACE_INTENSITIES[i]
         curColorArr = [1.0, 0.0, 0.0]
         newColorArr = [k*pixelValue for k in curColorArr]
         glColor3f(newColorArr[0], newColorArr[1], newColorArr[2])
-
-        # Draw triangle
-        glBegin(GL_TRIANGLES)
+        scale_factor = 50
         v1, v2, v3 = FACE_VERTICES[i]
-        glVertex2f(*v1)
-        glVertex2f(*v2)
-        glVertex2f(*v3)
+
+        # # Draw triangle
+        glBegin(GL_TRIANGLES)
+        glVertex3f(*v1/scale_factor)
+        glVertex3f(*v2/scale_factor)
+        glVertex3f(*v3/scale_factor)
         glEnd()
-    glFlush()
+
+        # Draw mesh
+        # glBegin(GL_LINES)
+        # glVertex3f(*v1/scale_factor)
+        # glVertex3f(*v2/scale_factor)
+        # glEnd()
+        # glBegin(GL_LINES)
+        # glVertex3f(*v1/scale_factor)
+        # glVertex3f(*v3/scale_factor)
+        # glEnd()
+        # glBegin(GL_LINES)
+        # glVertex3f(*v2/scale_factor)
+        # glVertex3f(*v3/scale_factor)
+        # glEnd()
+
+    glutSwapBuffers()
 
 
-def renderUsingCustomFunction():
-    glClear(GL_COLOR_BUFFER_BIT)
-    glColor3f(1.0, 0, 0)
-    glBegin(GL_POINTS)
-    if len(DISPLAY_MATRIX) != 0:
-        for i in range(HEIGHT):
-            for j in range(WIDTH):
-                pixelValue = DISPLAY_MATRIX[i][j]
-                curColorArr = [1.0, 0.0, 0.0]
-                newColorArr = [k*pixelValue for k in curColorArr]
-                glColor3f(newColorArr[0], newColorArr[1], newColorArr[2])
-                glVertex2f(j, HEIGHT-i)
-    glEnd()
-    glFlush()
+def reshape(width, height):
+    if height == 0:
+        height = 1
+    aspect = width/height
+    glViewport(0, 0, width, height)
+    glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
+    gluPerspective(45.0, aspect, 0.1, 50.0)
 
 
 if __name__ == '__main__':
@@ -77,15 +92,15 @@ if __name__ == '__main__':
     view_frustum = np.array([-5, 5, -5, 5, 2, 10])
 
     # Wolf
-    # model_enum = Models.wolf02
-    # camera_pos = np.array([0, 0, 100])
-    # light_source_pos = np.array([0, 0, 100])
-    # view_frustum = np.array([-20, 20, -20, 20, 2, 100])
+    model_enum = Models.wolf02
+    camera_pos = np.array([0, 0, 100])
+    light_source_pos = np.array([0, 0, 150])
+    view_frustum = np.array([-20, 20, -20, 20, 2, 100])
 
     # Cat
     # model_enum = Models.cat01
-    # camera_pos = np.array([0, 0, 150])
-    # light_source_pos = np.array([0, 0, 150])
+    # camera_pos = np.array([50, -60, 10])
+    # light_source_pos = np.array([-50, -60, 160])
     # view_frustum = np.array([-20, 20, -40, 40, 2, 130])
 
     model_details = MODEL_DETAILS[model_enum]
@@ -107,10 +122,10 @@ if __name__ == '__main__':
     [FACE_VERTICES, FACE_INTENSITIES] = get_visible_face_coords(
         faces_visible, window_coords, faces, face_intensities)
 
-    # print(np.array(FACE_VERTICES))
+    print(np.array(FACE_VERTICES))
     # print(np.array(FACE_INTENSITIES))
     # display_coords = rasterization(face_vertices, (WIDTH, HEIGHT))
     # DISPLAY_MATRIX = display_coords
 
     # Render openGL function
-    main(renderGLTriangle)
+    main(render3D)
